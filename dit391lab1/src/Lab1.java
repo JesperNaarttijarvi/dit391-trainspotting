@@ -8,9 +8,19 @@ public class Lab1 {
     public Lab1(Integer speed1, Integer speed2) {
         ArrayList<Semaphore> semaphores = new ArrayList<>();
 
+        for (int i = 0; i < 4; i++){
+            semaphores.add(new Semaphore(1));
+        }
+
         try {
             Train train1 = new Train(1, speed1, semaphores);
-            Train train2 = new Train(2, 0, semaphores);
+            Train train2 = new Train(2, speed2, semaphores);
+
+
+            train1.direction = DIRECTION.NORTH;
+            train2.direction = DIRECTION.SOUTH;
+
+
             train1.start();
             train2.start();
             train1.join();
@@ -30,7 +40,7 @@ public class Lab1 {
         private ArrayList<Semaphore> semaphores;
         private TSimInterface tsi;
         private String lastSensor;
-        private DIRECTION direction;
+        public DIRECTION direction;
 
 
         /**
@@ -47,6 +57,8 @@ public class Lab1 {
 
         @Override
         public void run() {
+
+
             while (true) {
                 try {
                     tsi.setSpeed(TRAIN_ID, TRAIN_SPEED);
@@ -87,37 +99,79 @@ public class Lab1 {
                                 break;
 
                             case "MIDDLE.N.0":
-                                if (this.direction == DIRECTION.SOUTH) tsi.setSwitch(17, 7, 0);
+                                if (this.direction == DIRECTION.SOUTH){
+                                    trainStop();
+
+                                    getSemaphore("CRITICAL_EAST").acquire();
+
+                                    trainStart();
+                                    tsi.setSwitch(17, 7, 0);
+                                }
                                 break;
 
                             case "MIDDLE.N.1":
-                                if (this.direction == DIRECTION.SOUTH) tsi.setSwitch(17, 7, 1);
+                                if (this.direction == DIRECTION.SOUTH){
+                                    trainStop();
+
+                                    getSemaphore("CRITICAL_EAST").acquire();
+
+                                    //trainStart();
+                                    tsi.setSwitch(17, 7, 1);
+                                }
                                 break;
 
                             case "MIDDLE.S.0":
-                                if (this.direction == DIRECTION.SOUTH) tsi.setSwitch(4, 9, 1);
-                                else tsi.setSwitch(15, 9, 0);
+                                trainStop();
+                                if (this.direction == DIRECTION.SOUTH){
+                                    getSemaphore("CRITICAL_WEST").acquire();
+                                    tsi.setSwitch(4, 9, 1);
+                                }
+                                else {
+                                    System.out.println("SDÖFLKSDÖLFKSDÖFLK");
+                                    getSemaphore("CRITICAL_EAST").acquire();
+                                    System.out.println("SDÖFLKSDÖLFKSDÖFLK");
+                                    tsi.setSwitch(15, 9, 0);
+                                }
                                 break;
 
                             case "MIDDLE.S.1":
-                                if (this.direction == DIRECTION.SOUTH) tsi.setSwitch(4, 9, 0);
-                                else tsi.setSwitch(15, 9, 1);
+                                trainStop();
+                                if (this.direction == DIRECTION.SOUTH){
+                                    getSemaphore("CRITICAL_WEST").acquire();
+                                    tsi.setSwitch(4, 9, 0);
+                                }
+                                else {
+                                    getSemaphore("CRITICAL_EAST").acquire();
+                                    tsi.setSwitch(15, 9, 1);
+                                }
                                 break;
 
                             case "CRITICAL.E.0": // TODO IF OCCUPIED
-                                if (this.direction == DIRECTION.NORTH) tsi.setSwitch(17, 7, 0);
+                                if (this.direction == DIRECTION.NORTH) {
+                                    tsi.setSwitch(17, 7, 0);
+                                    getSemaphore("CRITICAL_EAST").release();
+                                }
                                 break;
 
                             case "CRITICAL.E.1": // TODO IF OCCUPIED
-                                if (this.direction == DIRECTION.SOUTH) tsi.setSwitch(15, 9, 0);
+                                if (this.direction == DIRECTION.SOUTH){
+                                    tsi.setSwitch(15, 9, 0);
+                                    getSemaphore("CRITICAL_EAST").release();
+                                }
                                 break;
 
                             case "CRITICAL.W.0": // TODO IF OCCUPIED
-                                if (this.direction == DIRECTION.NORTH) tsi.setSwitch(4, 9, 0);
+                                if (this.direction == DIRECTION.NORTH){
+                                    tsi.setSwitch(4, 9, 0);
+                                    getSemaphore("CRITICAL_WEST").release();
+                                }
                                 break;
 
                             case "CRITICAL.W.1": // TODO IF OCCUPIED
-                                if (this.direction == DIRECTION.SOUTH) tsi.setSwitch(3, 11, 0);
+                                if (this.direction == DIRECTION.SOUTH) {
+                                    tsi.setSwitch(3, 11, 0);
+                                    getSemaphore("CRITICAL_WEST").release();
+                                }
                                 break;
                         }
 
@@ -129,6 +183,14 @@ public class Lab1 {
                     System.exit(1);
                 }
             }
+        }
+
+        void trainStop() throws CommandException{
+            this.tsi.setSpeed(this.TRAIN_ID, 0);
+        }
+
+        void trainStart() throws CommandException{
+            this.TRAIN_SPEED = this.TRAIN_SPEED;
         }
 
         /**
@@ -146,6 +208,17 @@ public class Lab1 {
 
             if (this.direction == DIRECTION.NORTH) this.direction = DIRECTION.SOUTH;
             else this.direction = DIRECTION.NORTH;
+        }
+
+        Semaphore getSemaphore(String name){
+            switch (name){
+                case "CRITICAL_EAST":
+                    return semaphores.get(0);
+                case "CRITICAL_WEST":
+                    return semaphores.get(1);
+                default:
+                    return null;
+            }
         }
 
         String getSensorPos(int x, int y) {
@@ -182,8 +255,9 @@ public class Lab1 {
 
     enum DIRECTION {
         SOUTH,
-        NORTH;
+        NORTH
     }
+
 
     /**
      * @param string
