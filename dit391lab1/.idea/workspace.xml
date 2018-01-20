@@ -11,11 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-      <file leaf-file-name="Lab1.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Lab1.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Lab1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+            <state relative-caret-position="375">
+              <caret line="18" column="42" lean-forward="false" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -23,25 +23,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="27" column="23" lean-forward="false" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Train.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Train.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Train.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1398">
-              <caret line="212" column="0" lean-forward="true" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
+            <state relative-caret-position="749">
+              <caret line="305" column="18" lean-forward="false" selection-start-line="305" selection-start-column="18" selection-end-line="305" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#getSemaphore#0;class#Train#0" expanded="false" />
                 <element signature="method#flipSwitch#0;class#Train#0" expanded="false" />
+                <element signature="e#12775#12776#0" expanded="true" />
+                <element signature="e#12835#12836#0" expanded="true" />
+                <element signature="e#12862#12863#0" expanded="true" />
+                <element signature="e#12923#12924#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,13 +75,22 @@
       <find>comman</find>
       <find>MIDDLE_SO</find>
       <find>RELEASED MIDD</find>
-      <find>.release</find>
       <find>fulHack</find>
       <find>binaryR</find>
       <find>binaryRelease()*</find>
       <find>release</find>
       <find>flip</find>
       <find>flipS</find>
+      <find>CRITICAL_WE</find>
+      <find>acquireHom</find>
+      <find>getSemaphore(&quot;MIDDLE_SOUTH&quot;).release();</find>
+      <find>getSemaphore(&quot;MIDDLE_SOUTH&quot;)</find>
+      <find>MIDDLE_NOR</find>
+      <find>.release</find>
+      <find>13</find>
+      <find>10</find>
+      <find>7</find>
+      <find>15</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -107,8 +109,8 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/TSim/TSimInterface.java" />
         <option value="$PROJECT_DIR$/src/BinarySemaphore.java" />
-        <option value="$PROJECT_DIR$/src/Lab1.java" />
         <option value="$PROJECT_DIR$/src/Train.java" />
+        <option value="$PROJECT_DIR$/src/Lab1.java" />
       </list>
     </option>
   </component>
@@ -320,12 +322,12 @@
       <workItem from="1516397668552" duration="2275000" />
       <workItem from="1516400014459" duration="3534000" />
       <workItem from="1516442321630" duration="22888000" />
-      <workItem from="1516467994394" duration="13329000" />
+      <workItem from="1516467994394" duration="21215000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48158000" />
+    <option name="totallyTimeSpent" value="56044000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="259" y="21" width="1922" height="1089" extended-state="6" />
@@ -659,16 +661,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Lab1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -679,12 +671,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Train.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1398">
-          <caret line="212" column="0" lean-forward="true" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
+        <state relative-caret-position="749">
+          <caret line="305" column="18" lean-forward="false" selection-start-line="305" selection-start-column="18" selection-end-line="305" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getSemaphore#0;class#Train#0" expanded="false" />
             <element signature="method#flipSwitch#0;class#Train#0" expanded="false" />
+            <element signature="e#12775#12776#0" expanded="true" />
+            <element signature="e#12835#12836#0" expanded="true" />
+            <element signature="e#12862#12863#0" expanded="true" />
+            <element signature="e#12923#12924#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Lab1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="18" column="42" lean-forward="false" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
