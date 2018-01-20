@@ -11,17 +11,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-      <file leaf-file-name="Lab1.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Lab1.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Lab1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+            <state relative-caret-position="6912">
+              <caret line="288" column="9" lean-forward="true" selection-start-line="288" selection-start-column="9" selection-end-line="288" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#15953#15954#0" expanded="true" />
-                <element signature="e#16001#16002#0" expanded="true" />
-                <element signature="e#16027#16028#0" expanded="true" />
-                <element signature="e#16076#16077#0" expanded="true" />
+                <element signature="e#16703#16704#0" expanded="true" />
+                <element signature="e#16751#16752#0" expanded="true" />
+                <element signature="e#16777#16778#0" expanded="true" />
+                <element signature="e#16826#16827#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -30,18 +30,28 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="15" column="61" lean-forward="false" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+            <state relative-caret-position="600">
+              <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TSimInterface.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CommandStatus.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TSim/CommandStatus.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-129">
+              <caret line="0" column="13" lean-forward="true" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TSimInterface.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/TSim/TSimInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4656">
-              <caret line="201" column="28" lean-forward="true" selection-start-line="201" selection-start-column="28" selection-end-line="201" selection-end-column="28" />
+            <state relative-caret-position="0">
+              <caret line="178" column="16" lean-forward="true" selection-start-line="178" selection-start-column="16" selection-end-line="178" selection-end-column="16" />
               <folding>
                 <element signature="e#3358#3359#0" expanded="true" />
                 <element signature="e#3384#3385#0" expanded="true" />
@@ -60,6 +70,11 @@
       <find>MIDDLE_NORTH</find>
       <find>CRITICAL_EAST&quot;).re</find>
       <find>CRITICAL_EAST</find>
+      <find>comman</find>
+      <find>MIDDLE_SO</find>
+      <find>RELEASED MIDD</find>
+      <find>release</find>
+      <find>.release</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -286,12 +301,12 @@
       <workItem from="1516393740705" duration="1874000" />
       <workItem from="1516397668552" duration="2275000" />
       <workItem from="1516400014459" duration="3534000" />
-      <workItem from="1516442321630" duration="16620000" />
+      <workItem from="1516442321630" duration="22888000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28561000" />
+    <option name="totallyTimeSpent" value="34829000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="259" y="21" width="1922" height="1089" extended-state="6" />
@@ -343,10 +358,10 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15953#15954#0" expanded="true" />
-            <element signature="e#16001#16002#0" expanded="true" />
-            <element signature="e#16027#16028#0" expanded="true" />
-            <element signature="e#16076#16077#0" expanded="true" />
+            <element signature="e#16703#16704#0" expanded="true" />
+            <element signature="e#16751#16752#0" expanded="true" />
+            <element signature="e#16777#16778#0" expanded="true" />
+            <element signature="e#16826#16827#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -376,10 +391,10 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15953#15954#0" expanded="true" />
-            <element signature="e#16001#16002#0" expanded="true" />
-            <element signature="e#16027#16028#0" expanded="true" />
-            <element signature="e#16076#16077#0" expanded="true" />
+            <element signature="e#16703#16704#0" expanded="true" />
+            <element signature="e#16751#16752#0" expanded="true" />
+            <element signature="e#16777#16778#0" expanded="true" />
+            <element signature="e#16826#16827#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -409,10 +424,10 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15953#15954#0" expanded="true" />
-            <element signature="e#16001#16002#0" expanded="true" />
-            <element signature="e#16027#16028#0" expanded="true" />
-            <element signature="e#16076#16077#0" expanded="true" />
+            <element signature="e#16703#16704#0" expanded="true" />
+            <element signature="e#16751#16752#0" expanded="true" />
+            <element signature="e#16777#16778#0" expanded="true" />
+            <element signature="e#16826#16827#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -434,10 +449,10 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15953#15954#0" expanded="true" />
-            <element signature="e#16001#16002#0" expanded="true" />
-            <element signature="e#16027#16028#0" expanded="true" />
-            <element signature="e#16076#16077#0" expanded="true" />
+            <element signature="e#16703#16704#0" expanded="true" />
+            <element signature="e#16751#16752#0" expanded="true" />
+            <element signature="e#16777#16778#0" expanded="true" />
+            <element signature="e#16826#16827#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -467,10 +482,10 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15953#15954#0" expanded="true" />
-            <element signature="e#16001#16002#0" expanded="true" />
-            <element signature="e#16027#16028#0" expanded="true" />
-            <element signature="e#16076#16077#0" expanded="true" />
+            <element signature="e#16703#16704#0" expanded="true" />
+            <element signature="e#16751#16752#0" expanded="true" />
+            <element signature="e#16777#16778#0" expanded="true" />
+            <element signature="e#16826#16827#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -500,10 +515,10 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15953#15954#0" expanded="true" />
-            <element signature="e#16001#16002#0" expanded="true" />
-            <element signature="e#16027#16028#0" expanded="true" />
-            <element signature="e#16076#16077#0" expanded="true" />
+            <element signature="e#16703#16704#0" expanded="true" />
+            <element signature="e#16751#16752#0" expanded="true" />
+            <element signature="e#16777#16778#0" expanded="true" />
+            <element signature="e#16826#16827#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -524,14 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TSim/AddingArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="38" column="31" lean-forward="false" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-9-oracle/lib/src.zip!/java.base/java/util/concurrent/Semaphore.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-11889">
@@ -539,35 +546,91 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSim/TSimInformation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSim/TrainEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSim/SensorEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="936">
+          <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSim/CommandException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSim/AddingArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="38" column="31" lean-forward="false" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSim/TSimInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="178" column="16" lean-forward="true" selection-start-line="178" selection-start-column="16" selection-end-line="178" selection-end-column="16" />
+          <folding>
+            <element signature="e#3358#3359#0" expanded="true" />
+            <element signature="e#3384#3385#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSim/CommandStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-129">
+          <caret line="0" column="13" lean-forward="true" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="15" column="61" lean-forward="false" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+        <state relative-caret-position="600">
+          <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-9-oracle/lib/src.zip!/java.base/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-207">
+          <caret line="841" column="16" lean-forward="false" selection-start-line="841" selection-start-column="16" selection-end-line="841" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Lab1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+        <state relative-caret-position="6912">
+          <caret line="288" column="9" lean-forward="true" selection-start-line="288" selection-start-column="9" selection-end-line="288" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15953#15954#0" expanded="true" />
-            <element signature="e#16001#16002#0" expanded="true" />
-            <element signature="e#16027#16028#0" expanded="true" />
-            <element signature="e#16076#16077#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TSim/TSimInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4656">
-          <caret line="201" column="28" lean-forward="true" selection-start-line="201" selection-start-column="28" selection-end-line="201" selection-end-column="28" />
-          <folding>
-            <element signature="e#3358#3359#0" expanded="true" />
-            <element signature="e#3384#3385#0" expanded="true" />
+            <element signature="e#16703#16704#0" expanded="true" />
+            <element signature="e#16751#16752#0" expanded="true" />
+            <element signature="e#16777#16778#0" expanded="true" />
+            <element signature="e#16826#16827#0" expanded="true" />
           </folding>
         </state>
       </provider>
