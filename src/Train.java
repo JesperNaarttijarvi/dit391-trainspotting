@@ -43,6 +43,8 @@ class Train implements Runnable {
                 if (sensorEvent.getStatus() == SensorEvent.ACTIVE) {
                     String sensorPos = sensor(sensorEvent);
                     trainStop();
+
+                    //TODO TA BORT DUBLETTER, ALLTSÅ ALLT!
                     switch (sensorPos) {
                         case "Unknown Sensor":
                             System.out.println("Unknown Sensor");
@@ -87,9 +89,8 @@ class Train implements Runnable {
                         case "MIDDLE.NE.0":
                             if (this.direction == DIRECTION.SOUTH) {
                                 getSemaphore("CRITICAL_EAST").acquire();
-                                System.out.println("****LOCKING CRITICAL EAST");
                                 flipSwitch(17, 7, switchtoRIGHT());//flip east switch up
-                                acquireMiddleSouth(15);
+                                acquireMiddle(15,9,"SOUTH");
 
                             } else {
                                 getSemaphore("CRITICAL_EAST").release();
@@ -100,10 +101,8 @@ class Train implements Runnable {
                         case "MIDDLE.NE.1":
                             if (this.direction == DIRECTION.SOUTH) {
                                 getSemaphore("CRITICAL_EAST").acquire();
-
-                                System.out.println("****LOCKING CRITICAL EAST");
                                 flipSwitch(17, 7, switchtoLEFT());//flip east switch down
-                                acquireMiddleSouth(15);
+                                acquireMiddle(15,9,"SOUTH");
 
                             } else {
                                 getSemaphore("CRITICAL_EAST").release();
@@ -114,7 +113,6 @@ class Train implements Runnable {
                         case "MIDDLE.SW.0":
                             if (this.direction == DIRECTION.SOUTH) {
                                 getSemaphore("CRITICAL_WEST").acquire();
-                                System.out.println("****LOCKING CRITICAL WEST");
                                 flipSwitch(4, 9, switchtoLEFT()); //flip west switch up
                                 acquireHomeSouth();
 
@@ -124,7 +122,6 @@ class Train implements Runnable {
                         case "MIDDLE.SW.1":
                             if (this.direction == DIRECTION.SOUTH) {
                                 getSemaphore("CRITICAL_WEST").acquire();
-                                System.out.println("****LOCKING CRITICAL WEST");
                                 flipSwitch(4, 9, switchtoRIGHT());//flip west switch down
                                 acquireHomeSouth();
 
@@ -134,9 +131,8 @@ class Train implements Runnable {
                         case "MIDDLE.SE.0": // TODO IF OCCUPIED
                             if (this.direction == DIRECTION.NORTH) {
                                 getSemaphore("CRITICAL_EAST").acquire();
-                                System.out.println("****LOCKING CRITICAL EAST");
                                 flipSwitch(15, 9, switchtoRIGHT()); //flip east switch up
-                                acquireMiddleNorth();
+                                acquireMiddle(17,7,"NORTH");
                             } else {
                                 getSemaphore("CRITICAL_EAST").release();
                                 getSemaphore("MIDDLE_NORTH").release();
@@ -146,9 +142,8 @@ class Train implements Runnable {
                         case "MIDDLE.SE.1":
                             if (this.direction == DIRECTION.NORTH) {
                                 getSemaphore("CRITICAL_EAST").acquire();
-                                System.out.println("****LOCKING CRITICAL EAST");
                                 flipSwitch(15, 9, switchtoLEFT()); //flip east switch DOWN
-                                acquireMiddleNorth();
+                                acquireMiddle(17,7,"NORTH");
                             } else {
                                 getSemaphore("CRITICAL_EAST").release();
                                 getSemaphore("MIDDLE_NORTH").release();
@@ -159,17 +154,12 @@ class Train implements Runnable {
                             //If going north
                             if (this.direction == DIRECTION.NORTH) {
                                 getSemaphore("CRITICAL_WEST").acquire();
-                                System.out.println("****ACQUIRED CRIT WEST");
-
                                 flipSwitch(3, 11, switchtoLEFT());//flip bottom left switch UP
-                                acquireMiddleSouth(4);
+                                acquireMiddle(4,9,"SOUTH");
                                 getSemaphore("HOME_SOUTH").release();
                             } else {
                                 getSemaphore("CRITICAL_WEST").release();
-                                System.out.println("****RELEASED CRIT WEST");
                                 getSemaphore("MIDDLE_SOUTH").release();
-                                System.out.println("****RELEASED MID SOUTH");
-
                             }
                             break;
 
@@ -177,7 +167,7 @@ class Train implements Runnable {
                             if (this.direction == DIRECTION.NORTH) {
                                 getSemaphore("CRITICAL_WEST").acquire();
                                 flipSwitch(3, 11, switchtoRIGHT());//flip bottom left switch DOWN
-                                acquireMiddleSouth(4);
+                                acquireMiddle(4,9,"SOUTH");
                                 getSemaphore("HOME_SOUTH").release();
                             } else {
                                 getSemaphore("CRITICAL_WEST").release();
@@ -204,31 +194,17 @@ class Train implements Runnable {
         }
     }
 
-    void acquireMiddleNorth() {
+    void acquireMiddle(int x, int y, String cardinalDir) {
 
         int thisDir = (this.direction == DIRECTION.SOUTH)? 0 : 1;
         int otherDir = (this.direction == DIRECTION.NORTH)? 0 : 1;
 
-        if (getSemaphore("MIDDLE_NORTH").tryAcquire()) {
-            System.out.println("****i LOCKED the LOWER MIDDLE NORTH");
-            flipSwitch(17, 7, thisDir); //upper track
+        if (getSemaphore("MIDDLE_"+cardinalDir).tryAcquire()) {
+            System.out.println("****i LOCKED the LOWER MIDDLE "+cardinalDir);
+            flipSwitch(x, y, thisDir); //upper track
         } else {
-            System.out.println("****LOCKED!!! Taking UPPER MIDDLE NORTH");
-            flipSwitch(17, 7, otherDir); //lower track
-        }
-    }
-
-    void acquireMiddleSouth(int x) {
-
-        int thisDir = (this.direction == DIRECTION.SOUTH)? 0 : 1;
-        int otherDir = (this.direction == DIRECTION.NORTH)? 0 : 1;
-
-        if (getSemaphore("MIDDLE_SOUTH").tryAcquire()) {
-            System.out.println("****i LOCKED the UPPER MIDDLE SOUTH");
-            flipSwitch(x, 9, thisDir); //upper track
-        } else {
-            System.out.println("****LOCKED!!! Taking LOWER MIDDLE SOUTH");
-            flipSwitch(x, 9, otherDir); //lower track
+            System.out.println("****LOCKED!!! Taking UPPER MIDDLE "+cardinalDir);
+            flipSwitch(x, y, otherDir); //lower track
         }
     }
 
