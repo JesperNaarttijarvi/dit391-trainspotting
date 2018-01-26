@@ -26,10 +26,12 @@
       <file leaf-file-name="Train.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Train.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7272">
-              <caret line="336" column="18" lean-forward="false" selection-start-line="336" selection-start-column="18" selection-end-line="336" selection-end-column="18" />
+            <state relative-caret-position="113">
+              <caret line="194" column="17" lean-forward="false" selection-start-line="194" selection-start-column="17" selection-end-line="194" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#9354#9355#0" expanded="true" />
+                <element signature="e#9419#9420#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -53,6 +55,14 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>tryAcquire</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>acquire</replace>
+    </replaceStrings>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -255,12 +265,12 @@
       <option name="presentableId" value="Default" />
       <updated>1516878152187</updated>
       <workItem from="1516878156098" duration="2457000" />
-      <workItem from="1516885619254" duration="5206000" />
+      <workItem from="1516885619254" duration="8290000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7663000" />
+    <option name="totallyTimeSpent" value="10747000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="521" y="3" width="1922" height="1089" extended-state="6" />
@@ -302,7 +312,18 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Train.java</url>
+          <line>269</line>
+          <properties class="Train" method="tryAcquire">
+            <option name="EMULATED" value="true" />
+          </properties>
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -352,10 +373,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Train.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7272">
-          <caret line="336" column="18" lean-forward="false" selection-start-line="336" selection-start-column="18" selection-end-line="336" selection-end-column="18" />
+        <state relative-caret-position="113">
+          <caret line="194" column="17" lean-forward="false" selection-start-line="194" selection-start-column="17" selection-end-line="194" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#9354#9355#0" expanded="true" />
+            <element signature="e#9419#9420#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -12,7 +12,7 @@ class Train implements Runnable {
     private int TRAIN_SPEED;
     private HashMap<String, Semaphore> semaphores;
     private TSimInterface tsi;
-    private String lastSensor;
+    private String lastSensor = "";
 
     /**
      * @param TRAIN_ID    Should be serial and unique
@@ -28,8 +28,8 @@ class Train implements Runnable {
     @Override
     public void run() {
         try {
-            tsi.setSpeed(TRAIN_ID, this.TRAIN_SPEED);
             while (true) {
+                tsi.setSpeed(TRAIN_ID, this.TRAIN_SPEED);
 
                 SensorEvent sensorEvent = tsi.getSensor(TRAIN_ID);
                 if (sensorEvent.getStatus() == SensorEvent.ACTIVE) {
@@ -50,17 +50,13 @@ class Train implements Runnable {
      * @param sensorPos Position of Sensor in String
      */
     private void onSensorEvent(String sensorPos) throws CommandException, InterruptedException {
+        tsi.setSpeed(TRAIN_ID,0);
         switch (sensorPos) {
             case "Unkown sensor":
                 break;
 
             case "H.N.N.1":
-                if (lastSensor == null) {
-                    lastSensor = sensorPos;
-                }
-                if (lastSensor.equals("H.N.N.2")) {
-                    stopAndTurn();
-                }
+                if (lastSensor.equals("H.N.N.2")) stopAndTurn();
                 lastSensor = sensorPos;
                 break;
 
@@ -68,7 +64,7 @@ class Train implements Runnable {
                 if(lastSensor.equals("H.N.N.3")) {
                     tryRelease("CP.N.M");
                 } else if (lastSensor.equals("H.N.N.1")){
-                    tryAcquire("CP.N.M");
+                    acquire("CP.N.M");
                 }
                 lastSensor = sensorPos;
                 break;
@@ -76,19 +72,17 @@ class Train implements Runnable {
             case "H.N.N.3":
                 if(lastSensor.equals("H.N.N.2")) {
                     tryRelease("CP.N.M");
-                    tryAcquire("CP.M.E");
+                    acquire("CP.M.E");
                     changeSwitch(SwitchLocation.NORTH, "RIGHT");
                 } else if (lastSensor.equals("CP.E.E")){ // since we know it must be cp. or h.n...
                     tryRelease("CP.M.E");
-                    tryAcquire("CP.N.M");
+                    acquire("CP.N.M");
                 }
                 lastSensor = sensorPos;
                 break;
 
             case "H.N.S.1":
-                if (lastSensor.equals("H.N.S.2")) {
-                    stopAndTurn();
-                }
+                if (lastSensor.equals("H.N.S.2"))  stopAndTurn();
                 lastSensor = sensorPos;
                 break;
 
@@ -96,7 +90,7 @@ class Train implements Runnable {
                 if(lastSensor.equals("H.N.S.3")) {
                     tryRelease("CP.N.M");
                 } else if (lastSensor.equals("H.S.N.1")){
-                    tryAcquire("CP.N.M");
+                    acquire("CP.N.M");
                 }
 
                 lastSensor = sensorPos;
@@ -105,11 +99,11 @@ class Train implements Runnable {
             case "H.N.S.3":
                 if(lastSensor.equals("H.N.S.2")) {
                     tryRelease("CP.N.M");
-                    tryAcquire("CP.M.E");
+                    acquire("CP.M.E");
                     changeSwitch(SwitchLocation.NORTH, "LEFT");
                 } else if (lastSensor.equals("CP.E.E")){ // catches both CP... sensors
                     tryRelease("CP.M.E");
-                    tryAcquire("CP.N.M");
+                    acquire("CP.N.M");
                 }
                 lastSensor = sensorPos;
                 break;
@@ -117,16 +111,14 @@ class Train implements Runnable {
             case "CP.E.E":
                 if (lastSensor.substring(0,3).equals("H.N")){ // catches both HN... sensors
                     tryRelease("H.N.S");
-                    Boolean available = acquireIfEmpty("CP.M.M");
-                    if (!available) {
+                    if (!tryAcquire("CP.M.M")) {
                         changeSwitch(SwitchLocation.EAST, "LEFT");
                     } else {
                         changeSwitch(SwitchLocation.EAST, "RIGHT");
                     }
                 } else if  (lastSensor.substring(0,3).equals("CP.")){
                     tryRelease("CP.M.M");
-                    Boolean available = acquireIfEmpty("H.N.S");
-                    if (!available) {
+                    if (!tryAcquire("H.N.S")) {
                         changeSwitch(SwitchLocation.NORTH, "RIGHT");
                     } else {
                         changeSwitch(SwitchLocation.NORTH, "LEFT");
@@ -139,7 +131,7 @@ class Train implements Runnable {
                 if(lastSensor.equals("CP.E.E")) {
                     tryRelease("CP.M.E");
                 } else if (lastSensor.equals("CP.N.W")) {
-                    tryAcquire("CP.M.E");
+                    acquire("CP.M.E");
                     changeSwitch(SwitchLocation.EAST, "RIGHT");
                 }
                 lastSensor = sensorPos;
@@ -149,7 +141,7 @@ class Train implements Runnable {
                 if(lastSensor.equals("CP.E.E")) {
                     tryRelease("CP.M.E");
                 } else if (lastSensor.equals("CP.S.W")) {
-                    tryAcquire("CP.M.E");
+                    acquire("CP.M.E");
                     changeSwitch(SwitchLocation.EAST, "LEFT");
                 }
                 lastSensor = sensorPos;
@@ -159,7 +151,7 @@ class Train implements Runnable {
                 if(lastSensor.equals("CP.W.W")) {
                     tryRelease("CP.M.W");
                 } else if (lastSensor.equals("CP.N.E")) {
-                    tryAcquire("CP.M.W");
+                    acquire("CP.M.W");
                     changeSwitch(SwitchLocation.WEST, "LEFT");
                 }
                 lastSensor = sensorPos;
@@ -168,9 +160,8 @@ class Train implements Runnable {
             case "CP.S.W":
                 if(lastSensor.equals("CP.W.W")) {
                     tryRelease("CP.M.W");
-
                 } else if (lastSensor.equals("CP.S.E")) {
-                    tryAcquire("CP.M.W");
+                    acquire("CP.M.W");
                     changeSwitch(SwitchLocation.WEST, "RIGHT");
                 }
                 lastSensor = sensorPos;
@@ -179,16 +170,14 @@ class Train implements Runnable {
             case "CP.W.W":
                 if (lastSensor.substring(0,3).equals("H.S")){ // catches both HN... sensors
                     tryRelease("H.S.S");
-                    Boolean available = acquireIfEmpty("CP.M.M");
-                    if (!available) {
+                    if (tryAcquire("CP.M.M")) {
                         changeSwitch(SwitchLocation.WEST, "RIGHT");
                     } else {
                         changeSwitch(SwitchLocation.WEST, "LEFT");
                     }
                 } else if  (lastSensor.substring(0,3).equals("CP.")){
                     tryRelease("CP.M.M");
-                    Boolean available = acquireIfEmpty("H.S.S");
-                    if (!available) {
+                    if (tryAcquire("H.S.S")) {
                         changeSwitch(SwitchLocation.SOUTH, "LEFT");
                     } else {
                         changeSwitch(SwitchLocation.SOUTH, "RIGHT");
@@ -199,28 +188,22 @@ class Train implements Runnable {
 
             case "H.S.N.1":
                 if (lastSensor.equals("H.S.N.2")) {
-                    tryAcquire("CP.M.W");
+                    acquire("CP.M.W");
                     changeSwitch(SwitchLocation.SOUTH, "LEFT");
                 } else if (lastSensor.equals("CP.W.W")){
                     tryRelease("CP.M.W");
                 }
-
                 lastSensor = sensorPos;
                 break;
 
             case "H.S.N.2":
-                if (lastSensor == null) {
-                    lastSensor = sensorPos;
-                }
-                if (lastSensor.equals("H.S.N.1")) {
-                    stopAndTurn();
-                }
+                if (lastSensor.equals("H.S.N.1")) stopAndTurn();
                 lastSensor = sensorPos;
                 break;
 
             case "H.S.S.1":
                 if (lastSensor.equals("H.S.S.2")) {
-                    tryAcquire("CP.M.W");
+                    acquire("CP.M.W");
                     changeSwitch(SwitchLocation.SOUTH, "RIGHT");
                 } else if (lastSensor.equals("CP.W.W")){
                     tryRelease("CP.M.W");
@@ -229,9 +212,7 @@ class Train implements Runnable {
                 break;
 
             case "H.S.S.2":
-                if (lastSensor.equals("H.S.S.1")) {
-                    stopAndTurn();
-                }
+                if (lastSensor.equals("H.S.S.1")) stopAndTurn();
                 lastSensor = sensorPos;
                 break;
         }
@@ -274,26 +255,20 @@ class Train implements Runnable {
 
     }
 
-    private boolean acquireIfEmpty(String semaphoreName) throws CommandException, InterruptedException {
-        boolean acquired = false;
-        Semaphore semaphore = this.semaphores.get(semaphoreName);
-        int availablePermits = semaphore.availablePermits();
-        if (availablePermits > 0) {
-            tryAcquire(semaphoreName);
-            acquired = true;
-        }
-        return acquired;
+
+    /**
+     * Calls acquire function from the semaphores in the HashMap
+     */
+    private void acquire(String semaphoreName) throws InterruptedException{
+        semaphores.get(semaphoreName).acquire();
+        System.out.println("Acquired " + semaphoreName);
     }
 
     /**
-     * Sets trainspeed to 0 and blocks until semaphore is acquired.
+     *Calls tryAcquire function from the semaphores in the HashMap
      */
-    private void tryAcquire(String semaphoreName) throws CommandException, InterruptedException {
-        Semaphore semaphore = this.semaphores.get(semaphoreName);
-        this.tsi.setSpeed(this.TRAIN_ID, 0);
-        semaphore.acquire();
-        this.tsi.setSpeed(this.TRAIN_ID, TRAIN_SPEED);
-        System.out.println("Acquired " + semaphoreName);
+    private boolean tryAcquire(String semaphoreName){
+        return semaphores.get(semaphoreName).tryAcquire();
     }
 
     /**
@@ -301,7 +276,7 @@ class Train implements Runnable {
      */
     private void tryRelease(String semaphoreName) {
         Semaphore semaphore = this.semaphores.get(semaphoreName);
-        if (semaphore.availablePermits() == 0) {
+        if (semaphore.availablePermits() < 1) {
             semaphore.release();
             System.out.println("Released " + semaphoreName);
         }
