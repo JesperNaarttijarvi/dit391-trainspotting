@@ -29,13 +29,13 @@ class Train implements Runnable {
     public void run() {
         try {
             while (true) {
-                tsi.setSpeed(TRAIN_ID, this.TRAIN_SPEED);
+                tsi.setSpeed(TRAIN_ID, this.TRAIN_SPEED); //this is explained below
 
                 SensorEvent sensorEvent = tsi.getSensor(TRAIN_ID);
                 if (sensorEvent.getStatus() == SensorEvent.ACTIVE) {
                     int sensor_x = sensorEvent.getXpos();
                     int sensor_y = sensorEvent.getYpos();
-                    String sensorPos = getSensorPos(sensor_x, sensor_y); /** TODO: DRAW A MAP WITH SENSORS */
+                    String sensorPos = getSensorPos(sensor_x, sensor_y);
                     onSensorEvent(sensorPos);
                 }
             }
@@ -46,13 +46,20 @@ class Train implements Runnable {
     }
 
     /**
-     * Makes actions based on the trains direction and available semaphores
+     * Based on the idea of "Stop, think, act"
+     * Whenever a train hits a sensor it will stop just before it jumps into its corresponding switch statement.
+     * Thereafter it will execute the code and rerun the while loop, which sets it in motion again.
+     *
+     * If a semaphore is taken: the train will either come to a halt and wait until the semaphores becomes
+     * available again so it can continue, or it will switch tracks, depending on what semaphores it tries
+     * to acquire from.
+     *
      * @param sensorPos Position of Sensor in String
      */
     private void onSensorEvent(String sensorPos) throws CommandException, InterruptedException {
         tsi.setSpeed(TRAIN_ID,0);
         switch (sensorPos) {
-            case "Unkown sensor":
+            case "Unknown sensor":
                 break;
 
             case "H.N.N.1":
@@ -60,10 +67,24 @@ class Train implements Runnable {
                 lastSensor = sensorPos;
                 break;
 
+            case "H.N.S.1":
+                if (lastSensor.equals("H.N.S.2"))  stopAndTurn();
+                lastSensor = sensorPos;
+                break;
+
             case "H.N.N.2":
                 if(lastSensor.equals("H.N.N.3")) {
                     tryRelease("CP.N.M");
                 } else if (lastSensor.equals("H.N.N.1")){
+                    acquire("CP.N.M");
+                }
+                lastSensor = sensorPos;
+                break;
+
+            case "H.N.S.2":
+                if(lastSensor.equals("H.N.S.3")) {
+                    tryRelease("CP.N.M");
+                } else if (lastSensor.equals("H.S.N.1")){
                     acquire("CP.N.M");
                 }
                 lastSensor = sensorPos;
@@ -78,21 +99,6 @@ class Train implements Runnable {
                     tryRelease("CP.M.E");
                     acquire("CP.N.M");
                 }
-                lastSensor = sensorPos;
-                break;
-
-            case "H.N.S.1":
-                if (lastSensor.equals("H.N.S.2"))  stopAndTurn();
-                lastSensor = sensorPos;
-                break;
-
-            case "H.N.S.2":
-                if(lastSensor.equals("H.N.S.3")) {
-                    tryRelease("CP.N.M");
-                } else if (lastSensor.equals("H.S.N.1")){
-                    acquire("CP.N.M");
-                }
-
                 lastSensor = sensorPos;
                 break;
 
@@ -170,14 +176,14 @@ class Train implements Runnable {
             case "CP.W.W":
                 if (lastSensor.substring(0,3).equals("H.S")){ // catches both HN... sensors
                     tryRelease("H.S.S");
-                    if (tryAcquire("CP.M.M")) {
+                    if (!tryAcquire("CP.M.M")) {
                         changeSwitch(SwitchLocation.WEST, "RIGHT");
                     } else {
                         changeSwitch(SwitchLocation.WEST, "LEFT");
                     }
                 } else if  (lastSensor.substring(0,3).equals("CP.")){
                     tryRelease("CP.M.M");
-                    if (tryAcquire("H.S.S")) {
+                    if (!tryAcquire("H.S.S")) {
                         changeSwitch(SwitchLocation.SOUTH, "LEFT");
                     } else {
                         changeSwitch(SwitchLocation.SOUTH, "RIGHT");
@@ -218,6 +224,14 @@ class Train implements Runnable {
         }
     }
 
+    /**
+     * Since tsim seems to act a little strange when it comes to flipping switches in the right direction,
+     * i.e. the direction of the switching changes with the direction of the train,
+     * We tried to simplify it with having a method which takes the direction of the switching along
+     * with what switch to flip.
+     *
+     * Then flips the according switch.
+     */
     private void changeSwitch(SwitchLocation railSwitch, String railSwitchLocation) throws CommandException{
         int x;
         int y;
@@ -231,6 +245,8 @@ class Train implements Runnable {
             dir = 0;
         }
 
+
+        //Location of the four switches.
         if(railSwitch.equals(SwitchLocation.NORTH)){
             x = 17;
             y = 7;
@@ -295,6 +311,10 @@ class Train implements Runnable {
         this.tsi.setSpeed(this.TRAIN_ID, TRAIN_SPEED);
     }
 
+
+    /**
+     * Method for returning the name of a sensor as a String, given its coordinates.
+     * */
     private String getSensorPos(int x, int y) {
         switch ((x * 100 + y)) {
             case 1103:

@@ -1,0 +1,26 @@
+Each time a train hits a sensor, the train will do a decision based on the sensor it just hit, and the last one it stepped over.
+
+Starting from the top:
+
+H.N.N.1 and H.N.S.1
+These are the northen home sensors. If the train is approaching the station it will stop and turn.
+
+H.N.N.2 and H.N.S.2
+The northen home sensors just before the station and after the four-way intersection. If the train is heading AWAY from the northen station, it will try to acquire the semaphore for the intersection so it can go through safely, if not, it will stop and wait until it before free.
+Heading home, it will release the same semaphore.
+
+H.N.N.3 and H.N.S.3
+Heading to the north, it will try to acquire the above mentioned semaphore and come to a halt if needed. Heading south it will release the western semaphore, and try to aquire the semaphore for the eastern critical section.
+if it fails it comes to a halt, else it moves and flips the switch correspondingly.
+
+CP.E.E. and CP.W.W
+Acts the same from both directions: Releases the semaphore it came from. Call the tryAcquire function for the default track its headed to. Depending on what the function returns, it acquires the track and flips the switch in the corresponding direction.
+
+CP.N... and CP.S...
+Acts similary to H.N.N.3 and H.N.S.3, but for it's corresponding tracks.
+
+H.S.N.1 and H.S.S.1
+See above.
+
+H.S.N.2 and H.S.S.2
+Acts similar to the northen home sensors.
